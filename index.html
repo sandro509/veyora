@@ -602,6 +602,47 @@
 
 </script>
 
-<!-- ================= FIN VEYORA PLATFORM ================= -->
+<!-- ================= FIN VEYORA PLATFORM ================= -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://mpdqielepxqpjhbzbryv.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_R4ImwmDIF5tAIHGKzIBUNg_05vS2MJW";
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const MONCASH_NUM = "+509 37XX-XXXX - Chanje li";
+  const NATCASH_NUM = "+509 38XX-XXXX - Chanje li";
+
+  async function submitVeyoraForm(e){
+    e.preventDefault();
+    const orderId = "VEY-" + Math.floor(1000 + Math.random()*9000);
+    const data = {
+      order_id: orderId,
+      service: document.getElementById("vpService")?.value || "Service",
+      name: document.getElementById("vpName").value,
+      phone: document.getElementById("vpPhone").value,
+      amount: parseInt(document.getElementById("vpAmount")?.value || 0),
+      payment: document.getElementById("vpPayment").value,
+      message: document.getElementById("vpMessage").value,
+      status: "En attente"
+    };
+    const { error } = await supabaseClient.from("veyora_orders").insert([data]);
+    if(error){ alert(error.message); return; }
+    localStorage.setItem("last_order_id", orderId);
+    alert("Kòmand "+orderId+" kreye! Kounya voye kòb la epi konfime ak ID tranzaksyon an.");
+    // Montre etap 2 ou te deja genyen an
+    document.getElementById("veyoraStep1").style.display="none";
+    document.getElementById("veyoraStep2").style.display="block";
+    document.getElementById("vpOrderId").innerText = orderId;
+  }
+
+  async function confirmVeyoraPayment(){
+    const tx = document.getElementById("vpTxId").value;
+    const orderId = localStorage.getItem("last_order_id");
+    if(!tx) return alert("Antre ID tranzaksyon an");
+    const { error } = await supabaseClient.from("veyora_orders").update({ tx_id: tx, status: "Peman voye" }).eq("order_id", orderId);
+    if(error){ alert(error.message); return; }
+    alert("Mèsi! Kòmand "+orderId+" ap verifye.");
+    closeVeyoraModal();
+  }
+</script>
 </body>
 </html>
