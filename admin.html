@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Veyora Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
+<body>
+<h1>Veyora - Kòmand yo</h1>
+<div id="orders"></div>
+<script>
+  const client = supabase.createClient("https://mpdqielepxqpjhbzbryv.supabase.co", "sb_publishable_R4ImwmDIF5tAIHGKzIBUNg_05vS2MJW");
+  async function load(){
+    const { data } = await client.from("veyora_orders").select("*").order("created_at", {ascending:false});
+    document.getElementById("orders").innerHTML = data.map(o=>`
+      <div style="border:1px solid #ccc;padding:10px;margin:10px">
+        <b>${o.order_id}</b> - ${o.name} (${o.phone}) - ${o.service} - ${o.amount} HTG - ${o.payment} - ${o.status}<br>
+        TX: ${o.tx_id || 'poko'}<br>
+        <button onclick="updateStatus('${o.order_id}','Valide')">Valide</button>
+        <button onclick="updateStatus('${o.order_id}','Rejte')">Rejte</button>
+      </div>`).join("");
+  }
+  async function updateStatus(id,status){
+    await client.from("veyora_orders").update({status}).eq("order_id",id);
+    load();
+  }
+  load();
+</script>
+</body></html>
