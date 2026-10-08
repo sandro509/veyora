@@ -200,6 +200,408 @@
   <footer>
     <p>© 2026 Veyora — Tous droits réservés.</p>
   </footer>
+<!-- ================= VEYORA PLATFORM ================= -->
 
+<style>
+  .veyora-platform {
+    padding: 70px 20px;
+    background: #f1f5f9;
+    text-align: center;
+  }
+
+  .veyora-platform h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #111827;
+  }
+
+  .veyora-platform > p {
+    max-width: 650px;
+    margin: 0 auto 35px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .vp-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+
+  .vp-card {
+    background: white;
+    padding: 28px 20px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+  }
+
+  .vp-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .vp-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+  }
+
+  .vp-card h3 {
+    margin-bottom: 10px;
+    color: #111827;
+  }
+
+  .vp-card p {
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .vp-btn {
+    border: none;
+    background: #111827;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .vp-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* Modal */
+  .vp-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .vp-modal-content {
+    background: white;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px 25px;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .vp-close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .vp-modal-content h2 {
+    margin-bottom: 20px;
+    padding-right: 30px;
+  }
+
+  .vp-form {
+    text-align: left;
+  }
+
+  .vp-form label {
+    display: block;
+    margin: 14px 0 6px;
+    font-weight: bold;
+  }
+
+  .vp-form input,
+  .vp-form select,
+  .vp-form textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
+  .vp-form textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .vp-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .vp-warning {
+    margin-top: 18px;
+    padding: 12px;
+    background: #fff7ed;
+    border-radius: 10px;
+    color: #9a3412;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .veyora-platform h2 {
+      font-size: 28px;
+    }
+
+    .vp-modal-content {
+      margin: 20px auto;
+    }
+  }
+</style>
+
+<section class="veyora-platform" id="veyora-services">
+
+  <h2>Tout ce dont vous avez besoin</h2>
+
+  <p>
+    Veyora rassemble plusieurs services digitaux et financiers
+    dans une seule plateforme, simple et adaptée aux utilisateurs haïtiens.
+  </p>
+
+  <div class="vp-grid">
+
+    <div class="vp-card">
+      <div class="vp-icon">💰</div>
+      <h3>Pocket Option</h3>
+      <p>
+        Demandez une recharge de votre compte Pocket Option
+        avec les moyens de paiement disponibles.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('Pocket Option')">
+        Commencer
+      </button>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-icon">📺</div>
+      <h3>Netflix & Abonnements</h3>
+      <p>
+        Accédez à différents services et abonnements digitaux
+        depuis Veyora.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('Netflix & Abonnements')">
+        Choisir
+      </button>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-icon">📱</div>
+      <h3>Recharge & Data</h3>
+      <p>
+        Recharge téléphonique et forfaits data pour rester connecté.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('Recharge & Data')">
+        Commander
+      </button>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-icon">💳</div>
+      <h3>MonCash & NatCash</h3>
+      <p>
+        Utilisez les solutions de paiement locales disponibles
+        pour vos commandes Veyora.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('MonCash / NatCash')">
+        Continuer
+      </button>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-icon">🌐</div>
+      <h3>Services digitaux</h3>
+      <p>
+        Découvrez d'autres services numériques utiles,
+        réunis sur une seule plateforme.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('Services digitaux')">
+        Découvrir
+      </button>
+    </div>
+
+    <div class="vp-card">
+      <div class="vp-icon">🛒</div>
+      <h3>Boutique Veyora</h3>
+      <p>
+        Une future boutique pour commander différents produits
+        et services directement sur Veyora.
+      </p>
+      <button class="vp-btn" onclick="openVeyoraModal('Boutique Veyora')">
+        Explorer
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FORMULAIRE VEYORA -->
+
+<div id="veyoraModal" class="vp-modal">
+
+  <div class="vp-modal-content">
+
+    <span class="vp-close" onclick="closeVeyoraModal()">&times;</span>
+
+    <h2>Faire une demande</h2>
+
+    <form class="vp-form" onsubmit="submitVeyoraForm(event)">
+
+      <label>Service</label>
+
+      <input
+        type="text"
+        id="vpService"
+        readonly
+      >
+
+      <label>Nom complet</label>
+
+      <input
+        type="text"
+        id="vpName"
+        placeholder="Votre nom"
+        required
+      >
+
+      <label>Numéro de téléphone</label>
+
+      <input
+        type="tel"
+        id="vpPhone"
+        placeholder="Ex: 37xx-xxxx"
+        required
+      >
+
+      <label>Montant</label>
+
+      <input
+        type="number"
+        id="vpAmount"
+        placeholder="Entrez le montant"
+        min="1"
+        required
+      >
+
+      <label>Moyen de paiement</label>
+
+      <select id="vpPayment" required>
+
+        <option value="">
+          Sélectionnez
+        </option>
+
+        <option value="MonCash">
+          MonCash
+        </option>
+
+        <option value="NatCash">
+          NatCash
+        </option>
+
+      </select>
+
+      <label>Message</label>
+
+      <textarea
+        id="vpMessage"
+        placeholder="Une précision concernant votre demande..."
+      ></textarea>
+
+      <button class="vp-submit" type="submit">
+        Envoyer la demande
+      </button>
+
+      <div class="vp-warning">
+        ⚠️ Pour Pocket Option, le trading comporte des risques.
+        Aucun bénéfice n'est garanti. Vérifiez toujours les
+        conditions du service avant toute transaction.
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+<script>
+
+  function openVeyoraModal(service) {
+
+    document.getElementById("vpService").value = service;
+
+    document.getElementById("veyoraModal").style.display = "block";
+  }
+
+
+  function closeVeyoraModal() {
+
+    document.getElementById("veyoraModal").style.display = "none";
+  }
+
+
+  function submitVeyoraForm(event) {
+
+    event.preventDefault();
+
+    const service =
+      document.getElementById("vpService").value;
+
+    const name =
+      document.getElementById("vpName").value;
+
+    const phone =
+      document.getElementById("vpPhone").value;
+
+    const amount =
+      document.getElementById("vpAmount").value;
+
+    const payment =
+      document.getElementById("vpPayment").value;
+
+    alert(
+      "Merci " + name +
+      " ! Votre demande pour " + service +
+      " a été enregistrée sur cette démonstration."
+    );
+
+    closeVeyoraModal();
+  }
+
+
+  window.onclick = function(event) {
+
+    const modal =
+      document.getElementById("veyoraModal");
+
+    if (event.target === modal) {
+
+      closeVeyoraModal();
+
+    }
+
+  };
+
+</script>
+
+<!-- ================= FIN VEYORA PLATFORM ================= -->
 </body>
 </html>
